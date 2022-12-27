@@ -3,8 +3,8 @@ package com.example.rantalapp;
 public class Livre {
 
     private int id;
-    private String title;
-    private double price;
+    public String title;
+    public double price;
 
     public Livre(int id, String title, double price) {
         this.id = id;
