@@ -12,10 +12,12 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText username,password,repassword;
-    Button signup,signin;
-    DB_Helper DB;
-
+    private EditText username;
+    private EditText password;
+    private EditText repassword;
+    private Button signup;
+    private Button signin;
+    private DB_Helper DB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,25 +38,24 @@ public class MainActivity extends AppCompatActivity {
                 String pass = password.getText().toString();
                 String repass = repassword.getText().toString();
 
-                if (TextUtils.isEmpty(user) || TextUtils.isEmpty(pass) || TextUtils.isEmpty(repass))
-                    Toast.makeText(MainActivity.this,"Tous les champs sont requis",Toast.LENGTH_SHORT).show();
-                else{
-                    if (pass.equals(repass)){
-                        Boolean checkusername = DB.checkUsername(user);
+                if (TextUtils.isEmpty(user) || TextUtils.isEmpty(pass) || TextUtils.isEmpty(repass)) {
+                    showToast("Tous les champs sont requis");
+                } else {
+                    if (pass.equals(repass)) {
+                        boolean checkusername = DB.checkUsername(user);
                         if (!checkusername) {
-                            Boolean insert = DB.insertData(user,pass);
-                            if(insert){
-                                Toast.makeText(MainActivity.this,"Enregistré avec succès",Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-                                startActivity(intent);
-                            }else{
-                                Toast.makeText(MainActivity.this,"échec de l'enregistrement",Toast.LENGTH_SHORT).show();
+                            boolean insert = DB.insertData(user, pass);
+                            if (insert) {
+                                showToast("Enregistré avec succès");
+                                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                            } else {
+                                showToast("échec de l'enregistrement");
                             }
-                        }else{
-                            Toast.makeText(MainActivity.this,"Le nom existe déjà",Toast.LENGTH_SHORT).show();
+                        } else {
+                            showToast("Le nom existe déjà");
                         }
-                    }else{
-                        Toast.makeText(MainActivity.this,"Les mots de passe ne correspondent pas",Toast.LENGTH_SHORT).show();
+                    } else {
+                        showToast("Les mots de passe ne correspondent pas");
                     }
                 }
             }
@@ -63,9 +64,12 @@ public class MainActivity extends AppCompatActivity {
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
-                startActivity(intent);
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
             }
         });
+    }
+
+    private void showToast(String message) {
+        Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
     }
 }

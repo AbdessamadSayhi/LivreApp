@@ -11,13 +11,12 @@
         android:layout_marginRight="5dp"
         android:layout_marginBottom="2sp"
         app:cardCornerRadius="19dp"
-        app:cardElevation="1dp">
-
+        app:cardElevation="1dp"
+        app:cardBackgroundColor="#ffa726">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:background="@color/purple_200"
             android:padding="7dp">
             <LinearLayout
                 android:layout_width="0dp"
@@ -25,7 +24,6 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="8"
                 android:orientation="vertical">
-
                 <TextView
                     android:id="@+id/txtV_price"
                     android:layout_width="wrap_content"
@@ -34,9 +32,9 @@
                     android:lines="1"
                     android:singleLine="true"
                     android:text=""
-                    android:textColor="@color/white"
-                    android:textSize="20sp" />
-
+                    android:textColor="#ffffff"
+                    android:textSize="20sp"
+                    style="@style/ProductTitleText" />
                 <TextView
                     android:id="@+id/txtV_title"
                     android:layout_width="wrap_content"
@@ -45,12 +43,9 @@
                     android:lines="1"
                     android:singleLine="true"
                     android:text=""
-                    android:textColor="@color/white"
-                    android:textSize="20sp" />
-
-
-
-
+                    android:textColor="#ffffff"
+                    android:textSize="20sp"
+                    style="@style/ProductTitleText" />
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
