@@ -20,9 +20,9 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        username = findViewById(R.id.username1);
-        password = findViewById(R.id.password1);
-        signin = findViewById(R.id.signin1);
+        username = findViewById(R.id.login_username);
+        password = findViewById(R.id.login_password);
+        signin = findViewById(R.id.login_signin);
         DB = new DB_Helper(this);
 
         signin.setOnClickListener(new View.OnClickListener() {
@@ -31,21 +31,31 @@ public class LoginActivity extends AppCompatActivity {
                 String user = username.getText().toString();
                 String pass = password.getText().toString();
 
+                // Vérifie si les champs de nom d'utilisateur et de mot de passe sont vides
                 if (TextUtils.isEmpty(user) || TextUtils.isEmpty(pass)){
-                    Toast.makeText(LoginActivity.this,"Tous les champs sont obligatoires",Toast.LENGTH_SHORT).show();
-
-                }else{
+                    // Affiche un message indiquant que tous les champs sont obligatoires
+                    showToast("Tous les champs sont obligatoires");
+                } else {
+                    // Vérifie si le nom d'utilisateur et le mot de passe sont valides
                     Boolean checkuserpass = DB.checkUsernamePassword(user,pass);
                     if (checkuserpass){
-                        Toast.makeText(LoginActivity.this,"Connexion réussie",Toast.LENGTH_SHORT).show();
+                        // Affiche un message indiquant que la connexion a réussi
+                        showToast("Connexion réussie");
+                        // Redirige vers l'écran principal
                         Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
                         startActivity(intent);
-                    }else{
-                        Toast.makeText(LoginActivity.this,"échec de la connexion",Toast.LENGTH_SHORT).show();
+                    } else {
+                        // Affiche un message indiquant que la connexion a échoué
+                        showToast("échec de la connexion");
                     }
                 }
             }
         });
 
+    }
+
+    // Affiche un Toast avec le message spécifié
+    private void showToast(String message) {
+        Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
     }
 }
