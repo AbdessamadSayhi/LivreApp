@@ -38,9 +38,6 @@ public class Adapter extends ArrayAdapter {
         txtV_price.setText(Double.toString(l.price));
         txtV_title.setText(l.title);
 
-
         return convertView;
     }
-
-
 }
